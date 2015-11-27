@@ -11,9 +11,9 @@ class Order
     @shop_info = JSON.parse(File.read('hipstercoffee.json'))
   end
 
-  def add_to_basket(item)
+  def add_to_basket(item, quantity)
     fail 'This item is not available' unless menu.include?(item)
-    @basket << item
+    quantity.times{ @basket << item }
   end
 
   def menu
