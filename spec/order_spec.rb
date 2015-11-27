@@ -68,6 +68,12 @@ describe Order do
         expect(File.read('receipts/customer_receipt.txt')).to include expected_content
       end
 
+      it 'takes payment and displays on receipt' do
+        order.pay_bill(30)
+        expected_content = "Cash: £30"
+        expect(File.read('receipts/customer_receipt.txt')).to include expected_content
+      end
+
     end
 
   end
