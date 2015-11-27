@@ -45,6 +45,17 @@ describe Order do
       end
     end
 
+    context '#create_receipt' do
+      it 'shows order summary along with prices, total and tax' do
+        expected_content =  "Cafe Latte 3 x 4.75\n" \
+                            "Cortado 2 x 4.55\n" \
+                            "Tax: 2.02\n" \
+                            "Total: 23.35"
+        order.create_receipt
+        expect(File.read('receipts/customer_receipt.txt')).to eq expected_content
+      end
+    end
+
   end
 
 end

@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'json'
 
 class Order
@@ -27,6 +26,18 @@ class Order
 
   def tax
     (subtotal/100*TAX).round(2)
+  end
+
+  def create_receipt
+    File.open("receipts/customer_receipt.txt", "w+") do |file|
+      file.write(basket_summary)
+    end
+  end
+
+  private
+
+  def basket_summary
+    basket.uniq.inject(""){ |str, item| str << (item + " #{basket.count(item)} x #{menu[item]}" + "\n") }
   end
 
 end
