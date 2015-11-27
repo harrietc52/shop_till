@@ -89,6 +89,12 @@ describe Order do
         it 'DOES NOT calculate 5% discount when order under £50' do
           expect(order.discount_over_50).to be_nil
         end
+
+        it 'calculates 10% discount on muffins' do
+          order.add_to_basket("Blueberry Muffin", 1)
+          expect(order.discount_of_muffin).to eq 0.41
+        end
+
       end
 
     end

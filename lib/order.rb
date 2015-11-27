@@ -45,6 +45,10 @@ class Order
     (subtotal*(0.05)).round(2) if subtotal > 50
   end
 
+  def discount_of_muffin
+    basket.inject(0) { |tot, item | item.include?("Muffin") ? (tot += (menu[item]*(0.1)).round(2)) : tot }
+  end
+
   private
 
   def receipt_header
@@ -58,7 +62,7 @@ class Order
     receipt = receipt_header
     receipt << basket.uniq.inject(""){ |str, item| str << (item + " #{basket.count(item)} x #{menu[item]}" + "\n") }
     receipt << "Tax: #{tax}\n"
-    receipt << "Total: £#{subtotal}\n"
+    receipt << "Total: £#{subtotal.round(2)}\n"
     receipt << "Cash: £#{payment}\n"
     receipt << "Change: £#{(payment - subtotal).round(2)}"
   end
