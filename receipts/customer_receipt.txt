@@ -8,3 +8,4 @@ Cortado 2 x 4.55
 Tax: 2.02
 Total: £23.35
 Cash: £30
+Change: £6.65

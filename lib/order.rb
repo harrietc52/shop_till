@@ -55,7 +55,8 @@ class Order
     receipt << basket.uniq.inject(""){ |str, item| str << (item + " #{basket.count(item)} x #{menu[item]}" + "\n") }
     receipt << "Tax: #{tax}\n"
     receipt << "Total: £#{subtotal}\n"
-    receipt << "Cash: £#{payment}"
+    receipt << "Cash: £#{payment}\n"
+    receipt << "Change: £#{(payment - subtotal).round(2)}"
   end
 
 end

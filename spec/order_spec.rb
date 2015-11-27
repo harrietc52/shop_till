@@ -74,6 +74,12 @@ describe Order do
         expect(File.read('receipts/customer_receipt.txt')).to include expected_content
       end
 
+      it 'calculates and displays change' do
+        order.pay_bill(30)
+        expected_content = "Change: £6.65"
+        expect(File.read('receipts/customer_receipt.txt')).to include expected_content
+      end
+
     end
 
   end
