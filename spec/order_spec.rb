@@ -2,7 +2,11 @@ require './lib/order'
 
 describe Order do
 
-  let(:order){Order.new}
+  let(:order){Order.new("Lucy")}
+
+  it "new order is initialized with customers name" do
+    expect(order.name).to eq "Lucy"
+  end
 
   context '#basket' do
     it 'is initialized with an empty basket' do
@@ -47,13 +51,23 @@ describe Order do
 
     context '#create_receipt' do
       it 'shows order summary along with prices, total and tax' do
-        expected_content =  "Cafe Latte 3 x 4.75\n" \
+        expected_content =  "Lucy\n" \
+                            "Cafe Latte 3 x 4.75\n" \
                             "Cortado 2 x 4.55\n" \
                             "Tax: 2.02\n" \
-                            "Total: 23.35"
+                            "Total: £23.35"
         order.create_receipt
-        expect(File.read('receipts/customer_receipt.txt')).to eq expected_content
+        expect(File.read('receipts/customer_receipt.txt')).to include expected_content
       end
+
+      it 'displays details of shop top of receipt' do
+        expected_content =  "The Coffee Connection\n\n" \
+                            "123 Lakeside Way\n" \
+                            "Phone: 16503600708\n"
+        order.create_receipt
+        expect(File.read('receipts/customer_receipt.txt')).to include expected_content
+      end
+
     end
 
   end

@@ -4,9 +4,10 @@ class Order
 
   TAX = 8.64
 
-  attr_reader :basket, :shop_info
+  attr_reader :basket, :shop_info, :name
 
-  def initialize
+  def initialize(name)
+    @name = name
     @basket = []
     @shop_info = JSON.parse(File.read('hipstercoffee.json'))
   end
@@ -36,8 +37,18 @@ class Order
 
   private
 
+  def receipt_header
+    receipt = "#{shop_info[0]["shopName"]}\n\n"
+    receipt << "#{shop_info[0]["address"]}\n"
+    receipt << "Phone: #{shop_info[0]["phone"]}\n"
+    receipt << "#{name}\n"
+  end
+
   def basket_summary
-    basket.uniq.inject(""){ |str, item| str << (item + " #{basket.count(item)} x #{menu[item]}" + "\n") }
+    receipt = receipt_header
+    receipt << basket.uniq.inject(""){ |str, item| str << (item + " #{basket.count(item)} x #{menu[item]}" + "\n") }
+    receipt << "Tax: #{tax}\n"
+    receipt << "Total: £#{subtotal}"
   end
 
 end
