@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'json'
-require 'pp'
 
 class Order
 
   attr_reader :basket, :shop_info
+
+  TAX = 8.64
 
   def initialize
     @basket = []
@@ -20,8 +21,12 @@ class Order
     shop_info[0]['prices'][0]
   end
 
-  def total
+  def subtotal
     basket.inject(0){ |tot, item| tot += menu[item] }
+  end
+
+  def tax
+    (subtotal/100*TAX).round(2)
   end
 
 end

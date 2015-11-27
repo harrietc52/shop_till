@@ -27,10 +27,16 @@ describe Order do
   end
 
   context '#total' do
-    it 'calculates total prices of items in the basket' do
+    it 'calculates subtotal prices of items in the basket' do
       order.add_to_basket("Cafe Latte", 3)
       order.add_to_basket("Cortado", 2)
-      expect(order.total).to eq 23.35
+      expect(order.subtotal).to eq 23.35
+    end
+
+    it 'calculates tax from subtotal' do
+      order.add_to_basket("Cafe Latte", 3)
+      order.add_to_basket("Cortado", 2)
+      expect(order.tax).to eq 2.02
     end
   end
 
