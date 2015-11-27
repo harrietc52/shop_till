@@ -80,6 +80,17 @@ describe Order do
         expect(File.read('receipts/customer_receipt.txt')).to include expected_content
       end
 
+      context 'discounts' do
+        it 'calculates 5% discount on orders over £50' do
+          order.add_to_basket("Affogato", 3)
+          expect(order.discount_over_50).to eq 3.39
+        end
+
+        it 'DOES NOT calculate 5% discount when order under £50' do
+          expect(order.discount_over_50).to be_nil
+        end
+      end
+
     end
 
   end

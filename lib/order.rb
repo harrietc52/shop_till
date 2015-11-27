@@ -41,6 +41,10 @@ class Order
     create_receipt
   end
 
+  def discount_over_50
+    (subtotal*(0.05)).round(2) if subtotal > 50
+  end
+
   private
 
   def receipt_header
