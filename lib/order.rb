@@ -12,12 +12,16 @@ class Order
   end
 
   def add_to_basket(item, quantity)
-    fail 'This item is not available' unless menu.include?(item)
+    fail 'This item is not available' unless menu.keys.include?(item)
     quantity.times{ @basket << item }
   end
 
   def menu
-    shop_info[0]['prices'][0].keys
+    shop_info[0]['prices'][0]
+  end
+
+  def total
+    basket.inject(0){ |tot, item| tot += menu[item] }
   end
 
 end

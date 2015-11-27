@@ -26,4 +26,12 @@ describe Order do
 
   end
 
+  context '#total' do
+    it 'calculates total prices of items in the basket' do
+      order.add_to_basket("Cafe Latte", 3)
+      order.add_to_basket("Cortado", 2)
+      expect(order.total).to eq 23.35
+    end
+  end
+
 end
