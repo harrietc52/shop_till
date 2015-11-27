@@ -13,6 +13,11 @@ describe Order do
       order.add_to_basket("Cafe Latte")
       expect(order.basket).to include("Cafe Latte")
     end
+
+    it 'raises an error if item is not available' do
+      expected_error = 'This item is not available'
+      expect{order.add_to_basket('coke')}.to raise_error(expected_error)
+    end
   end
 
 end
