@@ -3,9 +3,9 @@ require 'json'
 
 class Order
 
-  attr_reader :basket, :shop_info
-
   TAX = 8.64
+
+  attr_reader :basket, :shop_info
 
   def initialize
     @basket = []
