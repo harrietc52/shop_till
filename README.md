@@ -1,7 +1,7 @@
 Shop Till
 ==============
 
-*Instructions*: Please fork this repo and submit a pull request once you've finished. Then prepare for code review!
+*Instructions*: Please fork this repo and submit a pull request once you've finished.
 
 ![a till](/images/till.jpg)
 
